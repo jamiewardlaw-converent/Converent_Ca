@@ -1,17 +1,22 @@
-import { perspectives } from "../../../lib/perspectives";
+import ReactMarkdown from "react-markdown";
+import {
+  getPerspectiveBySlug,
+  getPerspectiveSlugs,
+} from "../../../lib/perspectives";
 import SiteHeader from "../../../components/SiteHeader";
 
 type PerspectivePageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return perspectives.map((item) => ({ slug: item.slug }));
+export async function generateStaticParams() {
+  const slugs = await getPerspectiveSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export default async function PerspectivePage({ params }: PerspectivePageProps) {
   const { slug } = await params;
-  const item = perspectives.find((p) => p.slug === slug);
+  const item = await getPerspectiveBySlug(slug);
 
   if (!item) {
     return (
@@ -31,6 +36,10 @@ export default async function PerspectivePage({ params }: PerspectivePageProps) 
     );
   }
 
+  const articleBody = Array.isArray(item.content)
+    ? item.content.join("\n\n")
+    : item.content;
+
   return (
     <>
       <SiteHeader />
@@ -49,9 +58,7 @@ export default async function PerspectivePage({ params }: PerspectivePageProps) 
         </section>
 
         <article className="section card perspectiveArticle sectionToneLight">
-          {item.content.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
+          <ReactMarkdown>{articleBody}</ReactMarkdown>
           <p>
             <a href="/perspectives">← Back to perspectives</a>
           </p>

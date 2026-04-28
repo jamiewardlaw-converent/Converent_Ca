@@ -8,7 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
-import type { Perspective } from "../lib/perspectives";
+import type { Perspective } from "../lib/perspectiveTypes";
 
 type FeaturedPerspectivesCarouselProps = {
   perspectives: Perspective[];

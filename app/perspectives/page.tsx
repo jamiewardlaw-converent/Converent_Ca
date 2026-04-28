@@ -1,7 +1,8 @@
-import { perspectivesNewestFirst } from "../../lib/perspectives";
+import { getPerspectivesNewestFirst } from "../../lib/perspectives";
 import SiteHeader from "../../components/SiteHeader";
 
-export default function PerspectivesIndexPage() {
+export default async function PerspectivesIndexPage() {
+  const perspectivesNewestFirst = await getPerspectivesNewestFirst();
   return (
     <>
       <SiteHeader />

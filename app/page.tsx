@@ -1,5 +1,5 @@
 import { getBasisScreenshots } from "../lib/basisMedia";
-import { featuredPerspectives } from "../lib/perspectives";
+import { getFeaturedPerspectives } from "../lib/perspectives";
 import BasisSection from "../components/BasisSection";
 import FeaturedPerspectivesCarousel from "../components/FeaturedPerspectivesCarousel";
 import SiteHeader from "../components/SiteHeader";
@@ -13,6 +13,7 @@ const BASIS_TAGLINE =
 
 export default async function HomePage() {
   const basisImageSrcs = getBasisScreenshots();
+  const featuredPerspectives = await getFeaturedPerspectives();
   return (
     <>
       <SiteHeader />

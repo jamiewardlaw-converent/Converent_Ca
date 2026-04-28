@@ -10,9 +10,13 @@
   },
   "private": true,
   "dependencies": {
+    "@keystatic/core": "^0.5.50",
+    "@keystatic/next": "^5.0.4",
+    "gray-matter": "^4.0.3",
     "next": "^16.2.4",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "react-markdown": "^10.1.0",
     "resend": "^6.12.2"
   },
   "devDependencies": {
