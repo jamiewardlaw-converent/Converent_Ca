@@ -1135,12 +1135,23 @@ p {
   gap: 0.75rem;
 }
 
-.aboutIntroImage {
+.aboutIntroTile {
+  margin: 0;
   width: 100%;
-  height: auto;
   border-radius: 10px;
   border: 1px solid var(--surface-border);
+  overflow: hidden;
+  background: rgba(0, 16, 33, 0.35);
+}
+
+.aboutIntroImage {
   display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0;
+  border: none;
 }
 
 @media (min-width: 980px) {
@@ -1152,9 +1163,9 @@ p {
   .aboutIntroRail {
     position: sticky;
     top: calc(5.4rem + env(safe-area-inset-top, 0px));
-    max-height: calc(100vh - 6.2rem);
-    overflow: auto;
-    padding-right: 0.2rem;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
   }
 }
 
@@ -1270,11 +1281,63 @@ p {
 }
 
 .perspectiveTile {
-  display: block;
-  text-decoration: none;
+  display: flex;
+  flex-direction: column;
   padding: 0.85rem 0.9rem 1rem;
   min-height: 220px;
   overflow: hidden;
+}
+
+.perspectiveTileMain {
+  display: block;
+  flex: 1 1 auto;
+  min-height: 0;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Card is a block link: kill default / nested link underline on body copy (summary). */
+a.perspectiveTileMain,
+a.perspectiveTileMain:hover,
+a.perspectiveTileMain:focus,
+a.perspectiveTileMain:focus-visible,
+a.perspectiveTileMain p,
+a.perspectiveTileMain h3 {
+  text-decoration: none;
+}
+
+/* Homepage carousel tiles still use `a.perspectiveTile` wrapping the summary. */
+a.perspectiveTile,
+a.perspectiveTile:hover,
+a.perspectiveTile:focus,
+a.perspectiveTile:focus-visible,
+a.perspectiveTile p,
+a.perspectiveTile h3 {
+  text-decoration: none;
+}
+
+.perspectiveTileMain:hover .tileCta {
+  text-decoration: underline;
+}
+
+.perspectiveTileTagList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.45rem;
+  margin: 0.75rem 0 0;
+  padding: 0.65rem 0 0;
+  list-style: none;
+  border-top: 1px solid rgba(36, 82, 133, 0.55);
+}
+
+.perspectiveTileTagList a.perspectiveTag--tile {
+  text-decoration: none;
+}
+
+.perspectiveTileTagList a.perspectiveTag--tile:hover {
+  text-decoration: none;
+  border-color: rgba(31, 157, 255, 0.55);
+  background: rgba(31, 157, 255, 0.18);
 }
 
 .perspectiveTileImage {
@@ -1297,9 +1360,12 @@ p {
   font-weight: 600;
 }
 
+/* Same horizontal span as `.perspectiveHero` inside `main.site` (hero is full column; article was capped at 860px). */
 .perspectiveArticle {
-  max-width: 860px;
-  margin: 1.5rem auto;
+  max-width: none;
+  width: 100%;
+  margin: 1.5rem auto 0;
+  box-sizing: border-box;
 }
 
 .perspectiveHero {
@@ -1349,6 +1415,127 @@ p {
 .perspectiveArticle h1 {
   margin: 0.2rem 0 1rem;
   font-size: clamp(1.7rem, 3vw, 2.4rem);
+}
+
+/* Markdown in perspective body: list markers inherit `li` color, not nested `p`
+   (`.sectionToneLight p` only targets paragraphs), so bullets stayed body `--text`. */
+.perspectiveArticle.sectionToneLight ul,
+.perspectiveArticle.sectionToneLight ol {
+  margin: 0 0 1rem;
+  padding-left: 1.35rem;
+  color: #475569;
+}
+
+.perspectiveArticle.sectionToneLight li {
+  margin: 0.35rem 0;
+  color: #475569;
+}
+
+.perspectiveArticle.sectionToneLight li::marker {
+  color: #64748b;
+}
+
+.perspectiveTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.55rem;
+  margin: 0 0 1.1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.perspectiveTags--bottom {
+  margin-top: 1.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.perspectiveTag {
+  display: inline-block;
+  margin: 0;
+  padding: 0.28rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  background: rgba(3, 105, 161, 0.1);
+  color: #0369a1;
+  border: 1px solid rgba(3, 105, 161, 0.28);
+}
+
+.perspectiveArticle.sectionToneLight a.perspectiveTag {
+  color: #0369a1;
+}
+
+.perspectiveArticle.sectionToneLight a.perspectiveTag:hover {
+  background: rgba(3, 105, 161, 0.16);
+  border-color: rgba(3, 105, 161, 0.45);
+}
+
+.perspectiveTag--tile {
+  background: rgba(31, 157, 255, 0.12);
+  color: #93c5fd;
+  border-color: rgba(31, 157, 255, 0.35);
+}
+
+.perspectivesFilterLine {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: #94a3b8;
+}
+
+.perspectivesFilterClear {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.perspectivesTagBrowse {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.55rem;
+  margin: 0 0 1.35rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid rgba(36, 82, 133, 0.45);
+}
+
+.perspectivesTagBrowseLink {
+  display: inline-block;
+  padding: 0.28rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  text-decoration: none;
+  border-radius: 999px;
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.45);
+  background: rgba(15, 23, 42, 0.35);
+}
+
+.perspectivesTagBrowseLink:hover {
+  color: #f1f5f9;
+  border-color: rgba(31, 157, 255, 0.55);
+}
+
+.perspectivesTagBrowseLink.isActive {
+  color: #0f172a;
+  background: #e2e8f0;
+  border-color: #e2e8f0;
+}
+
+.perspectivesEmptyFilter {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 0.5rem 0 1rem;
+  color: #cbd5e1;
+}
+
+.perspectivesEmptyFilter a {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .footer {

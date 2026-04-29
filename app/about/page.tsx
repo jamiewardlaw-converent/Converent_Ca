@@ -6,6 +6,7 @@ const ABOUT_RAIL_IMAGES = [
   { src: "/brand/westport-volvo-hpdi.jpg", alt: "Westport Volvo HPDI" },
   { src: "/brand/evs.jpg", alt: "Electric vehicles" },
   { src: "/brand/ford-motor-company.jpg", alt: "Ford Motor Company" },
+  { src: "/brand/unifire.jpg", alt: "Unifire" },
 ];
 
 export default function AboutPage() {
@@ -89,7 +90,9 @@ export default function AboutPage() {
             </div>
             <aside className="aboutIntroRail" aria-label="Project image highlights">
               {ABOUT_RAIL_IMAGES.map((item) => (
-                <img key={item.src} src={item.src} alt={item.alt} className="aboutIntroImage" />
+                <figure key={item.src} className="aboutIntroTile">
+                  <img src={item.src} alt={item.alt} className="aboutIntroImage" />
+                </figure>
               ))}
             </aside>
           </div>
