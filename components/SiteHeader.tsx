@@ -22,7 +22,7 @@ export default function SiteHeader({
               <img src="/brand/header-wordmark.png" alt="Converent" />
             </a>
             <nav className="siteHeaderNav" aria-label="Main">
-              <a href={servicesHref}>Services</a>
+              <a href={servicesHref}>Expertise</a>
               <a href="/#basis">BASIS</a>
               <a href="/perspectives">Perspectives</a>
               <a href={aboutHref}>About</a>

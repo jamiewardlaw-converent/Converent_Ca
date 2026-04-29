@@ -3,6 +3,7 @@ import type { Perspective } from "../perspectiveTypes";
 export const templatePerspective4: Perspective = {
   slug: "template-perspective-4",
   title: "Template Perspective 4",
+  tags: [],
   summary:
     "Second placeholder perspective featured on the homepage to exercise the two-up carousel behavior.",
   content: [
@@ -12,5 +13,6 @@ export const templatePerspective4: Perspective = {
   ],
   featured: true,
   image: "/brand/photo2.jpg",
+  heroImagePosition: "center",
   publishedAt: "2026-04-26",
 };

@@ -140,9 +140,10 @@ export default function BasisSection({
               <div className="basisEmptyBody" />
             </div>
             <p className="basisEmptyNote">
-              Product screenshots will appear here when added to{" "}
-              <code>public/brand</code> with names starting{" "}
-              <code>{BASIS_SCREENSHOT_PREFIX}</code>
+              Blurred BASIS previews appear here when <code>public/brand</code>{" "}
+              contains WebP files like{" "}
+              <code>{`${BASIS_SCREENSHOT_PREFIX}01.webp`}</code>. Generate from
+              raw shots with <code>npm run basis:previews</code>.
             </p>
           </div>
         ) : (
@@ -207,17 +208,21 @@ function BasisFigure({
       className={`basisFigure basisReveal${vis ? " isVisible" : ""}`}
       style={{ transitionDelay: `${Math.min(delay, 420)}ms` }}
     >
-      <figure className="basisFigureBlock">
+      <figure
+        className="basisFigureBlock"
+        onContextMenu={(e) => e.preventDefault()}
+      >
         <div className="basisFigureInner">
           <div className="basisFigureGlow" aria-hidden />
           <Image
             src={src}
             alt={label}
-            width={1280}
-            height={800}
+            width={800}
+            height={500}
             sizes="(max-width: 1024px) 92vw, 896px"
             className="basisFigureImg"
             priority={index < 1}
+            draggable={false}
           />
         </div>
       </figure>

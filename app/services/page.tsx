@@ -1,24 +1,29 @@
 import SiteHeader from "../../components/SiteHeader";
+import ServiceTiles from "../../components/ServiceTiles";
 import ServicesPillars from "../../components/ServicesPillars";
-import { INDUSTRY_TILES } from "../../lib/industryTiles";
-import { SERVICE_TILES } from "../../lib/serviceTiles";
+import { getIndustrySections, getServiceSections } from "../../lib/servicesContent";
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+  const [serviceTiles, industryTiles] = await Promise.all([
+    getServiceSections(),
+    getIndustrySections(),
+  ]);
+
   return (
     <>
       <SiteHeader />
-      <header
-        className="pageBanner"
-        aria-labelledby="services-page-heading"
-      >
+      <header className="pageBanner" aria-labelledby="expertise-page-heading">
         <div className="pageBannerInner">
-          <h1 id="services-page-heading" className="pageBannerTitle">
-            Services
+          <h1 id="expertise-page-heading" className="pageBannerTitle">
+            Expertise
           </h1>
         </div>
       </header>
       <main className="site">
-        <article className="section card prosePage servicesIntro sectionToneDark">
+        <article
+          id="services-intro"
+          className="section card prosePage servicesIntro sectionToneDark"
+        >
           <p>
             Converent supports organizations developing safety-relevant embedded
             products by applying systems engineering principles in execution. We
@@ -37,12 +42,18 @@ export default function ServicesPage() {
           </p>
         </article>
 
-        <ServicesPillars tiles={SERVICE_TILES} className="sectionToneLight" />
+        <ServicesPillars tiles={serviceTiles} className="sectionToneLight" />
 
-        <h2 className="servicesIndustriesHeading sectionToneLightHeading" id="industries-served">
-          Industries served
-        </h2>
-        <ServicesPillars tiles={INDUSTRY_TILES} className="sectionToneLight" />
+        <section
+          className="section card sectionToneLight servicesIndustriesStrip"
+          id="industries-served"
+          aria-labelledby="industries-served-heading"
+        >
+          <h2 className="servicesIndustriesHeading sectionToneLightHeading" id="industries-served-heading">
+            Industries served
+          </h2>
+          <ServiceTiles tiles={industryTiles} linkMode="none" />
+        </section>
       </main>
     </>
   );

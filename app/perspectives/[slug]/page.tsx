@@ -3,6 +3,7 @@ import {
   getPerspectiveBySlug,
   getPerspectiveSlugs,
 } from "../../../lib/perspectives";
+import { getTagTitleMap, prettifySlug } from "../../../lib/contentTags";
 import SiteHeader from "../../../components/SiteHeader";
 
 type PerspectivePageProps = {
@@ -40,6 +41,8 @@ export default async function PerspectivePage({ params }: PerspectivePageProps) 
     ? item.content.join("\n\n")
     : item.content;
 
+  const tagTitles = await getTagTitleMap();
+
   return (
     <>
       <SiteHeader />
@@ -48,7 +51,11 @@ export default async function PerspectivePage({ params }: PerspectivePageProps) 
           <img
             src={item.image}
             alt={item.title}
-            className="perspectiveHeroImage"
+            className={
+              item.heroImagePosition === "top"
+                ? "perspectiveHeroImage perspectiveHeroImage--top"
+                : "perspectiveHeroImage"
+            }
           />
           <div className="perspectiveHeroOverlay">
             <div className="eyebrow">Perspective</div>
@@ -59,6 +66,23 @@ export default async function PerspectivePage({ params }: PerspectivePageProps) 
 
         <article className="section card perspectiveArticle sectionToneLight">
           <ReactMarkdown>{articleBody}</ReactMarkdown>
+          {item.tags.length > 0 ? (
+            <ul
+              className="perspectiveTags perspectiveTags--bottom"
+              aria-label="Tags"
+            >
+              {item.tags.map((tagId) => (
+                <li key={tagId}>
+                  <a
+                    className="perspectiveTag"
+                    href={`/perspectives?tag=${encodeURIComponent(tagId)}`}
+                  >
+                    {tagTitles.get(tagId) ?? prettifySlug(tagId)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : null}
           <p>
             <a href="/perspectives">← Back to perspectives</a>
           </p>

@@ -37,3 +37,9 @@ These files were sourced from Wikimedia Commons and are free to use under the li
   - Source: https://commons.wikimedia.org/wiki/File:2004_Aston_Martin_DB9_(15311050868).jpg
   - Author: free photos & art
   - License: CC BY 2.0
+
+- `services-consulting-meeting.jpg`
+  - Source: https://commons.wikimedia.org/wiki/File:Business_people_discussing_in_the_cafe_(44876336845).jpg
+  - Author: Rawpixel Ltd (Flickr upload; see file page for upstream link)
+  - License: CC BY 2.0
+  - Note: Used as the `/services` intro hero background (tinted in CSS).

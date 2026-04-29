@@ -3,6 +3,7 @@ import type { Perspective } from "../perspectiveTypes";
 export const converentSystems: Perspective = {
   slug: "converent-systems",
   title: "Requirements Resurrection?",
+  tags: [],
   summary:
     "For years, requirements were treated as overhead. In a spec-driven era, they become control mechanisms again.",
   content: [
@@ -115,5 +116,6 @@ export const converentSystems: Perspective = {
   ],
   featured: true,
   image: "/brand/photo2.jpg",
+  heroImagePosition: "center",
   publishedAt: "2026-04-24",
 };

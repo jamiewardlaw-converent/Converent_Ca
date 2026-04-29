@@ -8,12 +8,47 @@ export type { Perspective } from "./perspectiveTypes";
 
 const PERSPECTIVES_DIR = path.join(process.cwd(), "content", "perspectives");
 
-type PerspectiveFrontmatter = Omit<Perspective, "content">;
+type PerspectiveFrontmatter = Omit<Perspective, "content" | "publishedAt"> & {
+  publishedAt?: string;
+};
 
 function sortByPublishedDesc(items: Perspective[]): Perspective[] {
   return [...items].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
   );
+}
+
+function hasValidPublishedDate(value: string | undefined): value is string {
+  if (!value) return false;
+  return !Number.isNaN(new Date(value).getTime());
+}
+
+function normalizeTags(value: unknown): string[] {
+  if (value == null) return [];
+  if (Array.isArray(value)) {
+    return value
+      .map((t) => {
+        if (typeof t === "string") return t.trim();
+        if (t && typeof t === "object") {
+          const o = t as Record<string, unknown>;
+          if (typeof o.slug === "string") return o.slug.trim();
+          if (typeof o.id === "string") return o.id.trim();
+        }
+        return "";
+      })
+      .filter(Boolean);
+  }
+  if (typeof value === "string") {
+    return value
+      .split(",")
+      .map((t) => t.trim())
+      .filter(Boolean);
+  }
+  return [];
+}
+
+function normalizeHeroImagePosition(value: unknown): "center" | "top" {
+  return value === "top" ? "top" : "center";
 }
 
 function normalizeFrontmatter(
@@ -24,9 +59,11 @@ function normalizeFrontmatter(
     slug,
     title: frontmatter.title ?? slug,
     summary: frontmatter.summary ?? "",
+    tags: normalizeTags(frontmatter.tags),
     featured: Boolean(frontmatter.featured),
     image: frontmatter.image ?? "/brand/photo1.jpg",
-    publishedAt: frontmatter.publishedAt ?? "1970-01-01",
+    heroImagePosition: normalizeHeroImagePosition(frontmatter.heroImagePosition),
+    publishedAt: frontmatter.publishedAt,
   };
 }
 
@@ -36,7 +73,7 @@ const loadPerspectives = cache(async (): Promise<Perspective[]> => {
     .filter((entry) => entry.isFile() && /\.(md|mdoc|mdx)$/i.test(entry.name))
     .map((entry) => entry.name);
 
-  const perspectives = await Promise.all(
+  const perspectives: Array<Perspective | null> = await Promise.all(
     files.map(async (filename) => {
       const fullPath = path.join(PERSPECTIVES_DIR, filename);
       const raw = await fs.readFile(fullPath, "utf8");
@@ -47,14 +84,21 @@ const loadPerspectives = cache(async (): Promise<Perspective[]> => {
         parsed.data as Partial<PerspectiveFrontmatter>,
       );
 
+      if (!hasValidPublishedDate(frontmatter.publishedAt)) {
+        return null;
+      }
+
       return {
         ...frontmatter,
+        publishedAt: frontmatter.publishedAt,
         content: parsed.content.trim(),
       };
     }),
   );
 
-  return sortByPublishedDesc(perspectives);
+  const publishedPerspectives = perspectives.filter((item) => item !== null);
+
+  return sortByPublishedDesc(publishedPerspectives);
 });
 
 export async function getAllPerspectives() {

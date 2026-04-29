@@ -5,15 +5,18 @@ import FeaturedPerspectivesCarousel from "../components/FeaturedPerspectivesCaro
 import SiteHeader from "../components/SiteHeader";
 import ServiceTiles from "../components/ServiceTiles";
 import ContactForm from "../components/ContactForm";
-import { INDUSTRY_TILES } from "../lib/industryTiles";
-import { SERVICE_TILES } from "../lib/serviceTiles";
+import { getIndustrySections, getServiceSections } from "../lib/servicesContent";
 
 const BASIS_TAGLINE =
   "The lightweight solution to a traceable safety case!";
 
 export default async function HomePage() {
   const basisImageSrcs = getBasisScreenshots();
-  const featuredPerspectives = await getFeaturedPerspectives();
+  const [featuredPerspectives, serviceTiles, industryTiles] = await Promise.all([
+    getFeaturedPerspectives(),
+    getServiceSections(),
+    getIndustrySections(),
+  ]);
   return (
     <>
       <SiteHeader />
@@ -39,17 +42,17 @@ export default async function HomePage() {
 
         <section id="services" className="section card homeBand sectionToneLight">
           <div className="homeBandInner">
-            <div className="eyebrow">Services</div>
+            <div className="eyebrow">Expertise</div>
             <h2>Embedded Systems &amp; Safety Engineering</h2>
             <p className="homeBandLead">
               Converent supports teams building safety-relevant embedded products
               with hands-on consulting, systems engineering, program leadership, and
               assurance from concept through production.
             </p>
-            <ServiceTiles tiles={SERVICE_TILES} />
+            <ServiceTiles tiles={serviceTiles} />
             <div className="industriesServedBlock">
               <h2 className="servicesIndustriesHeading">Industries served</h2>
-              <ServiceTiles tiles={INDUSTRY_TILES} />
+              <ServiceTiles tiles={industryTiles} />
             </div>
             <a href="/services" className="learnMoreButton">
               Learn more

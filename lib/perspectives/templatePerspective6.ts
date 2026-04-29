@@ -3,6 +3,7 @@ import type { Perspective } from "../perspectiveTypes";
 export const templatePerspective6: Perspective = {
   slug: "template-perspective-6",
   title: "Template Perspective 6",
+  tags: [],
   summary:
     "Additional non-featured placeholder to complete the six-perspective preview set.",
   content: [
@@ -12,5 +13,6 @@ export const templatePerspective6: Perspective = {
   ],
   featured: false,
   image: "/brand/photo2.jpg",
+  heroImagePosition: "center",
   publishedAt: "2026-04-28",
 };

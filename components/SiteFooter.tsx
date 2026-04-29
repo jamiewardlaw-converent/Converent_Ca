@@ -5,7 +5,7 @@ export default function SiteFooter() {
         <nav className="footerBreadcrumbs" aria-label="Site structure">
           <a href="/">Home</a>
           <span>/</span>
-          <a href="/services">Services</a>
+          <a href="/services">Expertise</a>
           <span>/</span>
           <a href="/perspectives">Perspectives</a>
           <span>/</span>

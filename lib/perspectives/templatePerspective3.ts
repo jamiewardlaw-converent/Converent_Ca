@@ -3,6 +3,7 @@ import type { Perspective } from "../perspectiveTypes";
 export const templatePerspective3: Perspective = {
   slug: "template-perspective-3",
   title: "Template Perspective 3",
+  tags: [],
   summary:
     "Placeholder perspective summary for layout and carousel testing across larger content sets.",
   content: [
@@ -12,5 +13,6 @@ export const templatePerspective3: Perspective = {
   ],
   featured: true,
   image: "/brand/photo1.jpg",
+  heroImagePosition: "center",
   publishedAt: "2026-04-25",
 };

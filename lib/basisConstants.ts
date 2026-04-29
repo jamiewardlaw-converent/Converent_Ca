@@ -1,5 +1,8 @@
 /**
- * Basename prefix for BASIS UI screenshots in `public/brand/`
- * (e.g. "Screenshot 2026-04-24 170215.png").
+ * Basename prefix for **sanitized** BASIS preview images in `public/brand/`.
+ * Only commit blurred exports (`basis-safe-*.webp`). Raw UI captures must not
+ * ship in `public/` (they would remain downloadable at `/brand/...`).
+ *
+ * Generate previews from raw shots: `npm run basis:previews` (see script).
  */
-export const BASIS_SCREENSHOT_PREFIX = "Screenshot 2026-04-24 17";
+export const BASIS_SCREENSHOT_PREFIX = "basis-safe-";

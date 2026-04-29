@@ -5,8 +5,8 @@ import { BASIS_SCREENSHOT_PREFIX } from "./basisConstants";
 const EXT = /\.(png|jpe?g|webp|avif|gif)$/i;
 
 /**
- * Returns public URLs (e.g. `/brand/Screenshot_...png`) sorted by filename.
- * Add files under `public/brand/`; no restart needed in dev after adding files.
+ * Returns public URLs for **sanitized** BASIS previews (e.g. `/brand/basis-safe-01.webp`)
+ * sorted by filename. Only blurred assets should use this prefix in `public/brand/`.
  */
 export function getBasisScreenshots(): string[] {
   const dir = join(process.cwd(), "public", "brand");

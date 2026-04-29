@@ -3,6 +3,7 @@ import type { Perspective } from "../perspectiveTypes";
 export const aiForcesTheHandOfSystemsThinking: Perspective = {
   slug: "ai-forces-the-hand-of-systems-thinking",
   title: "AI Forces the Hand Of Systems Thinking",
+  tags: [],
   summary:
     "Requirements did not disappear because they were wrong. They lost leverage because control moved downstream.",
   content: [
@@ -20,5 +21,6 @@ export const aiForcesTheHandOfSystemsThinking: Perspective = {
   ],
   featured: true,
   image: "/brand/photo1.jpg",
+  heroImagePosition: "center",
   publishedAt: "2026-04-20",
 };
