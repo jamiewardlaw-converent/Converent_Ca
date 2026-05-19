@@ -36,51 +36,19 @@ export default function AboutPage() {
                   alt="Jamie Wardlaw portrait"
                   className="aboutInlinePortrait"
                 />
-                Incorporated in 2026 by <strong>Jamie Wardlaw</strong> to deliver
-                to a wider audience the principles and practices of systems
-                engineering. <strong>Converent </strong>
-                is a sole-contractor consulting firm focused on helping teams
-                engineer convergence. Drawing on almost 30 years experience in the
-                field of embedded systems development; it is the goal of Converent
-                to improve systematically the quality of products that are delivered
-                to market. Engineering out systematic failure and managing residual
-                risk through the use of systems engineering principles and
-                practices.
+                Incorporated in 2026 by Jamie Wardlaw, Converent was established to bring the principles and practices of systems engineering to a wider audience. Converent is a sole-contractor consulting firm focused on helping teams achieve convergence in the development of complex products. Drawing on nearly 30 years of experience in embedded systems development, its aim is simple: improve the quality of products delivered to market by engineering out systematic failure and managing residual risk through disciplined application of systems engineering.
               </p>
               <p>
-                Over the course of my career I have been lucky enough to work on
-                products from as simple as a website to as complex as a nuclear
-                submarine. A common theme throughout has been that systematic
-                engineering practices are the key to success. Whether that be firing
-                up safely the largest of heaters in the Canadian Oil Sands,
-                delivering safety concepts on next generation EVs or prototype
-                engine starts with the biggest OEMs; systematic processes always
-                win.
+              Over the course of my career, I have worked on a broad spectrum of products, from simple web applications to highly complex systems, including nuclear submarine programs. Across this range, a consistent pattern has emerged: systematic engineering practices are the key to successful outcomes. Whether enabling safe startup of large-scale industrial systems in the Canadian oil sands, delivering safety concepts for next-generation electric vehicles, or supporting prototype engine development with major OEMs, structured processes consistently deliver better results.
               </p>
               <p>
-                The mindset that develops through working across many Industries on
-                a broad range of complex systems had me continually returning the
-                domain of Systems Engineering. Most recently the opportunities that
-                emerging technologies present are removing barriers to honoring the
-                key tenets of systematic development. Products go to market faster
-                but can be more wholly defined. The fear that persisted for many
-                years of the extra time or overhead of 'doing things right'
-                diminishes.
+              Working across industries and domains led me repeatedly back to systems engineering as the unifying discipline. Today, emerging technologies are removing many of the historical barriers to adopting these principles. Products can reach market faster while being more fully defined, and the long-standing concern that “doing things right” introduces excessive overhead is steadily diminishing.
             </p>
               <p>
-                The cross-industry appreciation that I have been able to gain
-                allows me to remove bias and rhetoric and focus on what
-                matters most to the development lifecycle. This experience,
-                reinforced by formal training in governing processes and standards
-                allows me to deliver a service that is if not completely complete
-                at least as complete as possible. It enables me to help teams tailor the lifecycle while ensuring the key tenets are honored.
+              This cross-industry perspective allows me to operate without bias toward specific tools, methods, or legacy practices, and instead focus on what matters most: enabling effective, fit-for-purpose development lifecycles. Combined with formal experience in standards and governance, this enables me to help organizations tailor their processes while ensuring that critical engineering principles are maintained.
               </p>
               <p>
-                In addition to guiding organizations on the key tenets of
-                systematic development I have also been lucky enough to build and
-                lead teams delivering products from the ground up. I welcome 
-                opportunities with early stage startups or established companies who
-                need fractional support in building and leading their teams.
+              In addition to advisory work, I have built and led teams delivering products from the ground up. I welcome opportunities to support early-stage startups or established organizations in a fractional leadership capacity, helping to shape both systems and teams.
               </p>
               <p>If you have an emergent need for support in delivery of complex products or services I would welcome the opportunity to discuss how I can help. Look forward to working with you!</p>
               <p>JW</p>
