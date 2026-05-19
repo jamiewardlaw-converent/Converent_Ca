@@ -1,5 +1,7 @@
 ## Third-party image attributions
 
+Visitor-facing credits also live in **`lib/imageCredits.ts`** (footer “Image credits” dialog and `/credits/` page). Update that file when you add rows here so the site stays in sync.
+
 These files were sourced from Wikimedia Commons and are free to use under the listed licenses.
 
 - `cnrl-horizon-oil-sands.jpg`
@@ -43,3 +45,37 @@ These files were sourced from Wikimedia Commons and are free to use under the li
   - Author: Rawpixel Ltd (Flickr upload; see file page for upstream link)
   - License: CC BY 2.0
   - Note: Used as the `/services` intro hero background (tinted in CSS).
+
+- `ready2scale-steps-hero.png` (Ready2Scale page hero)
+  - In-repo photography supplied by Converent (not Wikimedia Commons); used on `/ready2scale` in a 50/50 layout with a light blue-tinted CSS filter on the photo.
+  - Clothing hues on figures may be nudged toward the site accent (`#1f9dff`) via `scripts/recolor-ready2scale-trousers.mjs` for brand consistency (re-run on a fresh export if you replace the source).
+
+## Industry tiles
+
+Used on the home “Industries served” grid and `/services`. Several tiles under `public/brand/industries/` are from Wikimedia Commons (960px-wide derivatives; same license as each original); aerospace and medical device tiles use Vecteezy stock (credited above).
+
+- `automotiveBrz.png` (Automotive tile)
+  - In-repo marketing asset supplied by Converent (not Wikimedia Commons).
+
+- `industry-energy.jpg`
+  - Source: https://commons.wikimedia.org/wiki/File:Wind_turbines_in_southern_California_2016.jpg
+  - Author: Erik Wilde
+  - License: CC BY-SA 2.0
+
+- `industry-industrial.jpg`
+  - Source: https://commons.wikimedia.org/wiki/File:CNC_milling_machine.jpg
+  - Author: Impressionmanufacturer
+  - License: CC BY-SA 4.0
+
+- `industry-aerospace.jpg` (Aerospace industry tile)
+  - Source / credit: [Aerospace Stock photos by Vecteezy](https://www.vecteezy.com/free-photos/aerospace)
+  - License: Per [Vecteezy’s license](https://www.vecteezy.com/free-license) for the asset tier you used (Free / Pro); keep this attribution while the tile uses Vecteezy-sourced imagery.
+
+- `industry-robotics.png`
+  - Source: https://commons.wikimedia.org/wiki/File:Humanoid_robots_standing_in_a_factory.png
+  - Author / uploader: Neriex89 (Midjourney AI–generated; see Commons file page)
+  - License: CC0 1.0 Universal (public domain dedication)
+
+- `industry-medical.jpg` (Medical Device industry tile)
+  - Source / credit: [Medical Device Stock photos by Vecteezy](https://www.vecteezy.com/free-photos/medical-device)
+  - License: Per [Vecteezy’s license](https://www.vecteezy.com/free-license) for the asset tier you used (Free / Pro); keep this attribution while the tile uses Vecteezy-sourced imagery.

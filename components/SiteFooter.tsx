@@ -1,3 +1,5 @@
+import CreditsDialog from "./CreditsDialog";
+
 export default function SiteFooter() {
   return (
     <footer className="footer">
@@ -7,6 +9,8 @@ export default function SiteFooter() {
           <span>/</span>
           <a href="/services">Expertise</a>
           <span>/</span>
+          <a href="/ready2scale">Ready2Scale</a>
+          <span>/</span>
           <a href="/perspectives">Perspectives</a>
           <span>/</span>
           <a href="/about">About</a>
@@ -14,6 +18,7 @@ export default function SiteFooter() {
           <a href="/contact">Contact</a>
         </nav>
         <div className="footerBottom">
+          <CreditsDialog />
           <span className="footerCopy">
             © {new Date().getFullYear()} Converent
           </span>

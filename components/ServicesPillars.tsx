@@ -1,8 +1,6 @@
 "use client";
 
-import ReactMarkdown from "react-markdown";
-import type { ServiceTile } from "../lib/serviceTiles";
-import {
+import type { ServiceTile } from "../lib/serviceTiles";import {
   useCallback,
   useEffect,
   useLayoutEffect,
@@ -74,18 +72,13 @@ function PillarBlock({
   tile,
   reverse,
   className,
-  expanded,
-  onToggle,
 }: {
   tile: ServiceTile;
   reverse: boolean;
   className?: string;
-  expanded: boolean;
-  onToggle: () => void;
 }) {
   const [ref, vis] = useReveal<HTMLElement>();
   const hasVisual = Boolean(tile.logoSrc);
-  const detailsId = `services-pillar-details-${tile.anchor}`;
   const innerClass =
     "servicesPillarInner" +
     (hasVisual && reverse ? " servicesPillarInner--reverse" : "") +
@@ -120,29 +113,6 @@ function PillarBlock({
             {tile.title}
           </h2>
           <p className="servicesPillarExcerpt">{tile.excerpt}</p>
-          {tile.body ? (
-            <>
-              <button
-                type="button"
-                className="servicesPillarToggle"
-                aria-expanded={expanded}
-                aria-controls={detailsId}
-                onClick={onToggle}
-              >
-                <span>{expanded ? "Hide details" : "View details"}</span>
-                <span className={`servicesPillarToggleIcon${expanded ? " isOpen" : ""}`} aria-hidden>
-                  ▾
-                </span>
-              </button>
-              <div
-                id={detailsId}
-                className={`servicesPillarDetailsBody${expanded ? " isOpen" : ""}`}
-                hidden={!expanded}
-              >
-                <ReactMarkdown>{tile.body}</ReactMarkdown>
-              </div>
-            </>
-          ) : null}
         </div>
       </div>
     </section>
@@ -155,8 +125,6 @@ type ServicesPillarsProps = {
 };
 
 export default function ServicesPillars({ tiles, className }: ServicesPillarsProps) {
-  const [expandedAnchor, setExpandedAnchor] = useState<string | null>(null);
-
   return (
     <div className="servicesPillars">
       {tiles.map((tile, i) => (
@@ -165,10 +133,6 @@ export default function ServicesPillars({ tiles, className }: ServicesPillarsPro
           tile={tile}
           reverse={i % 2 === 1}
           className={className}
-          expanded={expandedAnchor === tile.anchor}
-          onToggle={() =>
-            setExpandedAnchor((current) => (current === tile.anchor ? null : tile.anchor))
-          }
         />
       ))}
     </div>

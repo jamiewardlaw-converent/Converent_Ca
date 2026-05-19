@@ -23,7 +23,7 @@ export default function SiteHeader({
             </a>
             <nav className="siteHeaderNav" aria-label="Main">
               <a href={servicesHref}>Expertise</a>
-              <a href="/#basis">BASIS</a>
+              <a href="/ready2scale">Ready2Scale</a>
               <a href="/perspectives">Perspectives</a>
               <a href={aboutHref}>About</a>
               <a href={contactHref}>Contact</a>

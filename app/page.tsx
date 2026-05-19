@@ -1,17 +1,11 @@
-import { getBasisScreenshots } from "../lib/basisMedia";
 import { getFeaturedPerspectives } from "../lib/perspectives";
-import BasisSection from "../components/BasisSection";
 import FeaturedPerspectivesCarousel from "../components/FeaturedPerspectivesCarousel";
 import SiteHeader from "../components/SiteHeader";
 import ServiceTiles from "../components/ServiceTiles";
 import ContactForm from "../components/ContactForm";
 import { getIndustrySections, getServiceSections } from "../lib/servicesContent";
 
-const BASIS_TAGLINE =
-  "The lightweight solution to a traceable safety case!";
-
 export default async function HomePage() {
-  const basisImageSrcs = getBasisScreenshots();
   const [featuredPerspectives, serviceTiles, industryTiles] = await Promise.all([
     getFeaturedPerspectives(),
     getServiceSections(),
@@ -49,10 +43,14 @@ export default async function HomePage() {
               with hands-on consulting, systems engineering, program leadership, and
               assurance from concept through production.
             </p>
-            <ServiceTiles tiles={serviceTiles} />
+            <div className="expertiseServiceTiles">
+              <ServiceTiles tiles={serviceTiles} />
+            </div>
             <div className="industriesServedBlock">
               <h2 className="servicesIndustriesHeading">Industries served</h2>
-              <ServiceTiles tiles={industryTiles} />
+              <div className="industryServiceTiles">
+                <ServiceTiles tiles={industryTiles} industryLens />
+              </div>
             </div>
             <a href="/services" className="learnMoreButton">
               Learn more
@@ -73,19 +71,6 @@ export default async function HomePage() {
             <div className="homeBandCarousel">
               <FeaturedPerspectivesCarousel perspectives={featuredPerspectives} />
             </div>
-          </div>
-        </section>
-
-        <section
-          id="basis"
-          className="section card homeBand basisHomeBand sectionToneLight"
-          aria-labelledby="basis-heading"
-        >
-          <div className="homeBandInner basisHomeBandInner">
-            <BasisSection
-              imageSrcs={basisImageSrcs}
-              tagline={BASIS_TAGLINE}
-            />
           </div>
         </section>
 

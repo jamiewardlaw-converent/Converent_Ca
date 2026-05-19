@@ -1,3 +1,4 @@
+import ContactForm from "../../components/ContactForm";
 import SiteHeader from "../../components/SiteHeader";
 import ServiceTiles from "../../components/ServiceTiles";
 import ServicesPillars from "../../components/ServicesPillars";
@@ -38,7 +39,7 @@ export default async function ServicesPage() {
             industrial, and adjacent safety-critical domains.
           </p>
           <p>
-            <a href="/contact">Contact us</a> · <a href="/">Home</a>
+            <a href="#services-contact">Contact us</a> · <a href="/">Home</a>
           </p>
         </article>
 
@@ -52,7 +53,22 @@ export default async function ServicesPage() {
           <h2 className="servicesIndustriesHeading sectionToneLightHeading" id="industries-served-heading">
             Industries served
           </h2>
-          <ServiceTiles tiles={industryTiles} linkMode="none" />
+          <div className="industryServiceTiles">
+            <ServiceTiles tiles={industryTiles} linkMode="none" industryLens />
+          </div>
+        </section>
+
+        <section
+          id="services-contact"
+          className="section card homeBand sectionToneDark"
+          aria-label="Contact"
+        >
+          <div className="homeBandInner">
+            <div className="eyebrow">Contact</div>
+            <div className="homeBandGrow">
+              <ContactForm />
+            </div>
+          </div>
         </section>
       </main>
     </>

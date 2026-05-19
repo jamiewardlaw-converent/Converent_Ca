@@ -15,6 +15,7 @@ import {
 type BasisSectionProps = {
   imageSrcs: string[];
   tagline: string;
+  showIntro?: boolean;
 };
 
 function useReveal<T extends HTMLElement>(): [RefObject<T | null>, boolean] {
@@ -96,37 +97,40 @@ function useBasisFeatureReveal() {
 export default function BasisSection({
   imageSrcs,
   tagline,
+  showIntro = true,
 }: BasisSectionProps) {
   const [headerRef, headerVis] = useBasisReveal();
   const [emptyRef, emptyVis] = useBasisReveal();
 
   return (
-    <div className="basisLayout">
-      <div
-        ref={headerRef}
-        className={`basisIntro basisReveal${headerVis ? " isVisible" : ""}`}
-        style={{ transitionDelay: "0ms" }}
-      >
-        <div className="eyebrow">In development</div>
-        <h2 className="basisTitle" id="basis-heading">
-          BASIS
-        </h2>
-        <p className="basisTagline">{tagline}</p>
-        <p className="basisBlurb">
-          BASIS is an emerging workspace for systems and functional safety
-          engineering designed to support end-to-end safety case capture with
-          minimal ceremony and strong traceability. Built on decades of hands-on
-          engineering experience, BASIS combines proven workflows with a modern,
-          AI-ready architecture. The platform is currently in early-stage development
-          and is open to partnership with organizations, universities, and research
-          institutions. If you work at the intersection of systems engineering,
-          functional safety, and innovation, you can help shape what comes next by
-          joining the journey to build this tool together.
-        </p>
-        <a href="/contact" className="learnMoreButton basisContactCta">
-          Learn more
-        </a>
-      </div>
+    <div className={`basisLayout${showIntro ? "" : " basisLayout--mediaOnly"}`}>
+      {showIntro ? (
+        <div
+          ref={headerRef}
+          className={`basisIntro basisReveal${headerVis ? " isVisible" : ""}`}
+          style={{ transitionDelay: "0ms" }}
+        >
+          <div className="eyebrow">In development</div>
+          <h2 className="basisTitle" id="basis-heading">
+            BASIS
+          </h2>
+          <p className="basisTagline">{tagline}</p>
+          <p className="basisBlurb">
+            BASIS is an emerging workspace for systems and functional safety
+            engineering designed to support end-to-end lifecycle deliverables with
+            minimal ceremony and strong traceability. Built on decades of hands-on
+            engineering experience, BASIS combines proven workflows with a modern,
+            AI-ready architecture. The platform is currently in early-stage development
+            and is open to partnership with organizations, universities, and research
+            institutions. If you work at the intersection of systems engineering,
+            functional safety, and innovation, you can help shape what comes next by
+            joining the journey to build this tool together.
+          </p>
+          <a href="/contact" className="learnMoreButton basisContactCta">
+            Learn more
+          </a>
+        </div>
+      ) : null}
 
       <div className="basisRightCol">
         {imageSrcs.length === 0 ? (

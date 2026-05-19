@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+  <!-- Segmented rings: strong outer aperture + inner mechanics; center stays clear for photo -->
+  <circle
+    cx="50"
+    cy="50"
+    r="47.5"
+    stroke="#021a28"
+    stroke-width="2.5"
+    opacity="0.42"
+  />
+  <circle
+    cx="50"
+    cy="50"
+    r="44.5"
+    stroke="#0d4a66"
+    stroke-width="7"
+    stroke-dasharray="28 16"
+    stroke-linecap="butt"
+    opacity="0.72"
+  />
+  <circle
+    cx="50"
+    cy="50"
+    r="44.5"
+    stroke="#2ec4ff"
+    stroke-width="7"
+    stroke-dasharray="28 16"
+    stroke-dashoffset="22"
+    stroke-linecap="butt"
+    opacity="0.38"
+  />
+  <circle
+    cx="50"
+    cy="50"
+    r="36.5"
+    stroke="#06354a"
+    stroke-width="3.2"
+    stroke-dasharray="14 9"
+    stroke-linecap="butt"
+    opacity="0.62"
+    transform="rotate(-18 50 50)"
+  />
+  <circle
+    cx="50"
+    cy="50"
+    r="36.5"
+    stroke="#2195f1"
+    stroke-width="3.2"
+    stroke-dasharray="14 9"
+    stroke-dashoffset="11.5"
+    stroke-linecap="butt"
+    opacity="0.36"
+    transform="rotate(-18 50 50)"
+  />
+  <circle
+    cx="50"
+    cy="50"
+    r="28.5"
+    stroke="#041820"
+    stroke-width="2.2"
+    stroke-dasharray="9 7"
+    stroke-linecap="butt"
+    opacity="0.55"
+    transform="rotate(38 50 50)"
+  />
+  <circle
+    cx="50"
+    cy="50"
+    r="28.5"
+    stroke="#5eb8f0"
+    stroke-width="2.2"
+    stroke-dasharray="9 7"
+    stroke-dashoffset="8"
+    stroke-linecap="butt"
+    opacity="0.28"
+    transform="rotate(38 50 50)"
+  />
+</svg>
