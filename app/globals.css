@@ -1205,12 +1205,50 @@ p {
   object-position: center;
 }
 
-/* Home expertise + industry: same 3-column track sizing (860px cap, 0.75rem gap). */
-.expertiseServiceTiles .serviceTilesGrid,
+/* Home expertise: four equal tiles in one row (full content width). */
+.expertiseServiceTiles .serviceTilesGrid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: min(1024px, 100%);
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.expertiseServiceTiles .serviceTile {
+  width: 100%;
+  min-height: 0;
+}
+
+.expertiseServiceTiles .serviceTileFigure {
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+.expertiseServiceTiles .serviceTile h3 {
+  font-size: clamp(0.62rem, 1.35vw, 0.78rem);
+  line-height: 1.25;
+  min-height: 2.6em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-wrap: balance;
+}
+
+/* Home industries: three equal tiles (860px cap). */
 .industryServiceTiles .serviceTilesGrid {
   grid-template-columns: repeat(3, minmax(0, 1fr));
   max-width: min(860px, 100%);
   gap: 0.75rem;
+}
+
+@media (max-width: 720px) {
+  .expertiseServiceTiles .serviceTilesGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: min(520px, 100%);
+  }
+
+  .expertiseServiceTiles .serviceTile h3 {
+    min-height: 2.4em;
+  }
 }
 
 /* Industry tiles: blurred surround + sharp center (masked), then vignette + ring overlay */

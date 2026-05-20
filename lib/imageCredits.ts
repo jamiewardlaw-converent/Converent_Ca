@@ -80,6 +80,10 @@ export const IMAGE_CREDIT_SECTIONS: readonly CreditSection[] = [
         detail: "Supplied by Converent (not from Commons or Vecteezy).",
       },
       {
+        label: "Embedded Software expertise tile — `embedded-software.svg`",
+        detail: "Supplied by Converent (not from Commons or Vecteezy).",
+      },
+      {
         label: "Ready2Scale page hero — `ready2scale-steps-hero.png`",
         detail:
           "Supplied by Converent (not from Commons or Vecteezy); shown on `/ready2scale` beside copy with a light CSS color treatment.",

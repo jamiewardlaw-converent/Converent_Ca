@@ -57,6 +57,9 @@ Used on the home “Industries served” grid and `/services`. Several tiles und
 - `automotiveBrz.png` (Automotive tile)
   - In-repo marketing asset supplied by Converent (not Wikimedia Commons).
 
+- `embedded-software.svg` (Embedded Software expertise tile)
+  - In-repo marketing asset supplied by Converent (not Wikimedia Commons).
+
 - `industry-energy.jpg`
   - Source: https://commons.wikimedia.org/wiki/File:Wind_turbines_in_southern_California_2016.jpg
   - Author: Erik Wilde

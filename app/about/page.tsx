@@ -1,3 +1,4 @@
+import ContactForm from "../../components/ContactForm";
 import SiteHeader from "../../components/SiteHeader";
 
 const ABOUT_RAIL_IMAGES = [
@@ -52,9 +53,6 @@ export default function AboutPage() {
               </p>
               <p>If you have an emergent need for support in delivery of complex products or services I would welcome the opportunity to discuss how I can help. Look forward to working with you!</p>
               <p>JW</p>
-              <p className="aboutIntroLinks">
-                <a href="/contact">Contact us</a> · <a href="/">Home</a>
-              </p>
             </div>
             <aside className="aboutIntroRail" aria-label="Project image highlights">
               {ABOUT_RAIL_IMAGES.map((item) => (
@@ -65,6 +63,19 @@ export default function AboutPage() {
             </aside>
           </div>
         </article>
+
+        <section
+          id="about-contact"
+          className="section card homeBand sectionToneDark"
+          aria-label="Contact"
+        >
+          <div className="homeBandInner">
+            <div className="eyebrow">Contact</div>
+            <div className="homeBandGrow">
+              <ContactForm />
+            </div>
+          </div>
+        </section>
       </main>
     </>
   );
