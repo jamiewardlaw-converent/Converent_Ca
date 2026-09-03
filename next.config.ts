@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true, // needed if you're using next/image with static export
   },
-  trailingSlash: true, // optional, often helpful for static hosting
+  // Keystatic's API uses trailing slashes (`/api/keystatic/tree/`). Forcing a
+  // slash on admin item URLs after save makes Keystatic throw Not found, so
+  // keep trailingSlash but do not 308-redirect between the two forms.
+  trailingSlash: true,
+  skipTrailingSlashRedirect: true,
 };
 export default nextConfig;

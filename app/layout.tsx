@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import SiteFooter from "../components/SiteFooter";
+import SiteFooterGate from "../components/SiteFooterGate";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
-        <SiteFooter />
+        <SiteFooterGate />
       </body>
     </html>
   );
