@@ -1,5 +1,6 @@
 import { getFeaturedPerspectives } from "../lib/perspectives";
 import FeaturedPerspectivesCarousel from "../components/FeaturedPerspectivesCarousel";
+import HomeHero from "../components/HomeHero";
 import SiteHeader from "../components/SiteHeader";
 import ServiceTiles from "../components/ServiceTiles";
 import ContactForm from "../components/ContactForm";
@@ -14,6 +15,8 @@ export default async function HomePage() {
   return (
     <>
       <SiteHeader />
+      <HomeHero />
+      <div className="homeOverWaves">
       <main className="site">
         <section
           id="about"
@@ -21,7 +24,7 @@ export default async function HomePage() {
           aria-labelledby="home-intro-heading"
         >
           <div className="homeBandInner">
-            <h2 id="home-intro-heading">Clarity in Systems & Software</h2>
+            <h2 id="home-intro-heading">clarity in systems and software</h2>
             <p className="homeBandLead homeBandLeadOnTop">
               Converent provides tailored, hands-on experience in safety-related
               embedded systems development. We work alongside your team to turn
@@ -83,6 +86,7 @@ export default async function HomePage() {
           </div>
         </section>
       </main>
+      </div>
     </>
   );
 }

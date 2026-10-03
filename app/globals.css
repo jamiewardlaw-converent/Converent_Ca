@@ -33,6 +33,85 @@ a {
   padding: 1.2rem 0 3rem;
 }
 
+.homeWaves {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100svh;
+  pointer-events: none;
+}
+
+.homeWaves canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+body:has(.homeHero) {
+  --home-stage: 100svh;
+}
+
+.homeHero {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: var(--home-stage, 100svh);
+  min-height: 560px;
+  background: linear-gradient(180deg, #02060e 0%, #02060e 48%, rgba(2, 6, 14, 0) 74%);
+  cursor: pointer;
+}
+
+.homeOverWaves {
+  position: relative;
+  z-index: 1;
+  margin-top: calc(-1 * var(--home-stage, 0px));
+  pointer-events: none;
+  background: transparent;
+  opacity: 0;
+  transition: opacity 1.2s ease 0.35s;
+}
+
+body.homeHeroSettled .homeOverWaves {
+  opacity: 1;
+}
+
+.homeOverWaves .site {
+  pointer-events: none;
+  padding-top: 0;
+}
+
+body.homeHeroSettled .homeOverWaves .site {
+  pointer-events: auto;
+}
+
+.homeHero canvas {
+  transition: opacity 1.25s ease;
+}
+
+body.homeHeroSettled .homeHero canvas {
+  opacity: 0;
+}
+
+.homeHero canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.homeHeroTitle,
+.homeHeroTag {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Full-width sticky header (outside .site width) */
 .siteHeader {
   position: sticky;
@@ -41,6 +120,19 @@ a {
   width: 100%;
   background: #000000;
   border-bottom: 1px solid #1a1a1a;
+  transition: opacity 1.15s ease 0.2s;
+}
+
+body:has(.homeHero) .siteHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+body:has(.homeHero):not(.homeHeroSettled) .siteHeader {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .siteHeaderBar {
@@ -188,7 +280,14 @@ a {
 
 /* First home band below sticky header — padding on .homeBandInner only so bg reaches card border */
 #about.homeBand.section {
-  padding: 100px 0 0;
+  scroll-margin-top: 5.5rem;
+  padding: 6.75rem 0 0;
+}
+
+#about.homeBand .homeBandInner > h2 {
+  font-variant: small-caps;
+  font-weight: 500;
+  letter-spacing: 0.14em;
 }
 
 /* About card: designer image on the right, blended so copy stays readable */
@@ -1947,11 +2046,14 @@ a.perspectiveTile h3 {
 }
 
 .footer {
+  position: relative;
+  z-index: 1;
   width: 100%;
   margin-top: 1.5rem;
   background: #000000;
   border-top: 1px solid #1a1a1a;
 }
+
 
 .footerInner {
   max-width: min(1120px, 92vw);
@@ -2284,7 +2386,7 @@ a.perspectiveTile h3 {
   }
 
   #about.homeBand.section {
-    padding: 100px 0 0;
+    padding: 6.25rem 0 0;
   }
 
   #about.homeBand .homeBandInner {
