@@ -68,12 +68,12 @@ body:has(.homeHero) {
   margin-top: calc(-1 * var(--home-stage, 0px));
   pointer-events: none;
   background: transparent;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 1.2s ease 0.35s;
 }
 
-body.homeHeroSettled .homeOverWaves {
-  opacity: 1;
+body.homeHeroPlaying:not(.homeHeroSettled) .homeOverWaves {
+  opacity: 0;
 }
 
 .homeOverWaves .site {
@@ -130,9 +130,23 @@ body:has(.homeHero) .siteHeader {
   right: 0;
 }
 
-body:has(.homeHero):not(.homeHeroSettled) .siteHeader {
+body.homeHeroPlaying:not(.homeHeroSettled) .siteHeader {
   opacity: 0;
   pointer-events: none;
+}
+
+@media (max-width: 800px) {
+  body:has(.homeHero) .siteHeader {
+    position: sticky;
+  }
+
+  .homeHero {
+    min-height: 0;
+  }
+
+  #about.homeBand.section {
+    padding-top: 2.4rem;
+  }
 }
 
 .siteHeaderBar {
@@ -2386,7 +2400,7 @@ a.perspectiveTile h3 {
   }
 
   #about.homeBand.section {
-    padding: 6.25rem 0 0;
+    padding: 2rem 0 0;
   }
 
   #about.homeBand .homeBandInner {

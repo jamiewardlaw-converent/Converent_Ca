@@ -85,6 +85,7 @@ export default function HomeHero() {
     if (!ctx || !waveCtx) return;
 
     const family = montserrat.style.fontFamily;
+    const compact = window.matchMedia("(max-width: 800px)").matches;
     let cancelled = false;
     let raf = 0;
     let dpr = 1;
@@ -168,7 +169,7 @@ export default function HomeHero() {
       const rect = canvas.getBoundingClientRect();
       w = Math.max(1, rect.width);
       h = Math.max(1, rect.height);
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, compact ? 1 : 2);
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
       ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -182,7 +183,7 @@ export default function HomeHero() {
       const waveRect = waveCanvas.getBoundingClientRect();
       ww = Math.max(1, waveRect.width);
       wh = Math.max(1, waveRect.height);
-      const waveDpr = Math.min(window.devicePixelRatio || 1, 2);
+      const waveDpr = Math.min(window.devicePixelRatio || 1, compact ? 1 : 2);
       waveCanvas.width = Math.round(ww * waveDpr);
       waveCanvas.height = Math.round(wh * waveDpr);
       waveCtx!.setTransform(waveDpr, 0, 0, waveDpr, 0, 0);
@@ -299,13 +300,13 @@ export default function HomeHero() {
       return height * swell.y + (a * 0.8 + b * 0.2) * height * swell.amp;
     }
 
-    function drawWaves(time: number) {
+    function drawWaves(time: number, light = false) {
       waveCtx!.clearRect(0, 0, ww, wh);
       waveCtx!.save();
       waveCtx!.globalCompositeOperation = "lighter";
-      const step = 2;
+      const step = light ? 5 : 2;
       for (const swell of swells) {
-        for (let r = 0; r < swell.band; r++) {
+        for (let r = 0; r < swell.band; r += light ? 2 : 1) {
           const along = 1 - r / swell.band;
           const spread = (r - swell.band * 0.12) * (wh * 0.0042);
           const bright = r < 2;
@@ -331,8 +332,10 @@ export default function HomeHero() {
         }
         waveCtx!.lineWidth = 1.4;
         waveCtx!.strokeStyle = `rgba(186, 228, 255, ${0.18 + swell.alpha * 0.28})`;
-        waveCtx!.shadowColor = "rgba(70, 170, 255, 0.9)";
-        waveCtx!.shadowBlur = 18;
+        if (!light) {
+          waveCtx!.shadowColor = "rgba(70, 170, 255, 0.9)";
+          waveCtx!.shadowBlur = 18;
+        }
         waveCtx!.stroke();
         waveCtx!.shadowBlur = 0;
       }
@@ -474,6 +477,10 @@ export default function HomeHero() {
 
     function frame(now: number) {
       const time = (now - origin) / 1000;
+      if (compact) {
+        drawWaves(time, true);
+        return;
+      }
       const L = layout();
       drawBackground(time);
       drawWaves(time);
@@ -499,11 +506,15 @@ export default function HomeHero() {
       if (cancelled) return;
       const dt = Math.min(0.033, Math.max(0, (now - (prevTime || now)) / 1000));
       prevTime = now;
-      update(dt, now);
-      const tagShown = tagStart != null && now - tagStart > 1100 + 1800;
-      const failSafe = origin > 0 && now - origin > 12000;
-      if (tagShown || failSafe) revealContent();
-      frame(now);
+      try {
+        if (!compact) update(dt, now);
+        const tagShown = tagStart != null && now - tagStart > 1100 + 1800;
+        const failSafe = origin > 0 && now - origin > 9000;
+        if (compact || tagShown || failSafe) revealContent();
+        frame(now);
+      } catch {
+        revealContent();
+      }
       raf = requestAnimationFrame(loop);
     }
 
@@ -518,12 +529,14 @@ export default function HomeHero() {
     }
 
     replayRef.current = () => {
+      if (compact) return;
       concealContent();
       reset();
     };
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced) revealContent();
+    if (reduced || compact) revealContent();
+    else document.body.classList.add("homeHeroPlaying");
 
     function boot() {
       if (cancelled) return;
@@ -556,12 +569,16 @@ export default function HomeHero() {
       new Promise((resolve) => setTimeout(resolve, 1200)),
     ]).then(boot);
 
+    const failTimer = window.setTimeout(revealContent, 9000);
+
     return () => {
       cancelled = true;
       replayRef.current = null;
       cancelAnimationFrame(raf);
+      window.clearTimeout(failTimer);
       observer.disconnect();
       document.body.classList.remove("homeHeroSettled");
+      document.body.classList.remove("homeHeroPlaying");
     };
   }, []);
 
