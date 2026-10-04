@@ -412,19 +412,28 @@ export default function HomeHero() {
           ctx!.stroke();
           if (traceLogo(L, eased, -1)) ctx!.stroke();
         };
-        ctx!.shadowColor = "rgba(0, 176, 255, 0.9)";
-        ctx!.shadowBlur = 20;
-        ctx!.strokeStyle = "rgba(56, 186, 255, 0.5)";
-        ctx!.lineWidth = lw + 6;
-        strokeBoth();
-        ctx!.shadowBlur = 8;
-        ctx!.strokeStyle = "#4ec8ff";
-        ctx!.lineWidth = lw + 1;
-        strokeBoth();
-        ctx!.shadowBlur = 0;
-        ctx!.strokeStyle = "#7ad7ff";
-        ctx!.lineWidth = Math.max(1.2, lw * 0.45);
-        strokeBoth();
+        if (compact) {
+          ctx!.shadowColor = "rgba(0, 176, 255, 0.75)";
+          ctx!.shadowBlur = 10;
+          ctx!.strokeStyle = "#4ec8ff";
+          ctx!.lineWidth = lw;
+          strokeBoth();
+          ctx!.shadowBlur = 0;
+        } else {
+          ctx!.shadowColor = "rgba(0, 176, 255, 0.9)";
+          ctx!.shadowBlur = 20;
+          ctx!.strokeStyle = "rgba(56, 186, 255, 0.5)";
+          ctx!.lineWidth = lw + 6;
+          strokeBoth();
+          ctx!.shadowBlur = 8;
+          ctx!.strokeStyle = "#4ec8ff";
+          ctx!.lineWidth = lw + 1;
+          strokeBoth();
+          ctx!.shadowBlur = 0;
+          ctx!.strokeStyle = "#7ad7ff";
+          ctx!.lineWidth = Math.max(1.2, lw * 0.45);
+          strokeBoth();
+        }
         ctx!.restore();
       }
 
@@ -450,7 +459,7 @@ export default function HomeHero() {
         ctx!.restore();
       }
 
-      if (tagStart != null) {
+      if (!compact && tagStart != null) {
         const p = clamp((now - tagStart) / 1100);
         ctx!.save();
         ctx!.globalAlpha = smoothstep(0, 1, p);
@@ -477,15 +486,11 @@ export default function HomeHero() {
 
     function frame(now: number) {
       const time = (now - origin) / 1000;
-      if (compact) {
-        drawWaves(time, true);
-        return;
-      }
       const L = layout();
       drawBackground(time);
-      drawWaves(time);
+      if (!compact) drawWaves(time);
       drawRain(L, presenceNow(now), now);
-      drawSparks();
+      if (!compact) drawSparks();
       drawMark(now, L);
     }
 
@@ -507,14 +512,16 @@ export default function HomeHero() {
       const dt = Math.min(0.033, Math.max(0, (now - (prevTime || now)) / 1000));
       prevTime = now;
       try {
-        if (!compact) update(dt, now);
+        update(dt, now);
         const tagShown = tagStart != null && now - tagStart > 1100 + 1800;
+        const wordShown = wordStart != null && now - wordStart > 1500;
         const failSafe = origin > 0 && now - origin > 9000;
-        if (compact || tagShown || failSafe) revealContent();
-        frame(now);
+        if ((!compact && tagShown) || (compact && wordShown) || failSafe) revealContent();
+        if (!(compact && revealed)) frame(now);
       } catch {
         revealContent();
       }
+      if (compact && revealed) return;
       raf = requestAnimationFrame(loop);
     }
 
@@ -535,8 +542,7 @@ export default function HomeHero() {
     };
 
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || compact) revealContent();
-    else document.body.classList.add("homeHeroPlaying");
+    if (reduced) revealContent();
 
     function boot() {
       if (cancelled) return;
@@ -578,7 +584,6 @@ export default function HomeHero() {
       window.clearTimeout(failTimer);
       observer.disconnect();
       document.body.classList.remove("homeHeroSettled");
-      document.body.classList.remove("homeHeroPlaying");
     };
   }, []);
 
