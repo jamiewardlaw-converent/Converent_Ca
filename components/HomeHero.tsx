@@ -85,7 +85,7 @@ export default function HomeHero() {
     if (!ctx || !waveCtx) return;
 
     const family = montserrat.style.fontFamily;
-    const compact = window.matchMedia("(max-width: 800px)").matches;
+    const compact = window.matchMedia("(max-width: 1024px)").matches;
     let cancelled = false;
     let raf = 0;
     let dpr = 1;
@@ -136,15 +136,15 @@ export default function HomeHero() {
     }
 
     function buildColumns(resetY: boolean) {
-      const fontSize = clamp(w / 70, 16, 22);
+      const fontSize = clamp(w / 70, compact ? 14 : 16, compact ? 18 : 22);
       const colW = fontSize * 1.28;
-      const streamW = clamp(w * 0.26, 280, 460);
-      const count = Math.max(14, Math.floor(streamW / colW));
+      const streamW = compact ? clamp(w * 0.42, 160, 280) : clamp(w * 0.26, 280, 460);
+      const count = Math.max(compact ? 8 : 14, Math.floor(streamW / colW));
       const left = w * 0.5 - (count * colW) * 0.5;
       const next: Column[] = [];
       for (let i = 0; i < count; i++) {
         const prev = columns[i];
-        const trail = Math.max(18, Math.round(h / (fontSize * 0.88)));
+        const trail = compact ? 12 : Math.max(18, Math.round(h / (fontSize * 0.88)));
         const spacing = h / trail;
         const chars: string[] = [];
         for (let k = 0; k < trail; k++) chars.push(Math.random() < 0.5 ? "0" : "1");
@@ -167,12 +167,29 @@ export default function HomeHero() {
 
     function resize() {
       const rect = canvas.getBoundingClientRect();
-      w = Math.max(1, rect.width);
-      h = Math.max(1, rect.height);
-      dpr = Math.min(window.devicePixelRatio || 1, compact ? 1 : 2);
-      canvas.width = Math.round(w * dpr);
-      canvas.height = Math.round(h * dpr);
-      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const nextW = Math.max(1, rect.width);
+      const nextH = Math.max(1, rect.height);
+      const nextDpr = Math.min(window.devicePixelRatio || 1, compact ? 1 : 2);
+      const pw = Math.round(nextW * nextDpr);
+      const ph = Math.round(nextH * nextDpr);
+      const sizeChanged = nextW !== w || nextH !== h || nextDpr !== dpr || canvas.width !== pw;
+      w = nextW;
+      h = nextH;
+      dpr = nextDpr;
+      if (sizeChanged) {
+        canvas.width = pw;
+        canvas.height = ph;
+        ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+        buildColumns(false);
+      }
+
+      if (compact) {
+        if (waveCanvas.width !== 1) {
+          waveCanvas.width = 1;
+          waveCanvas.height = 1;
+        }
+        return;
+      }
 
       const layer = waveCanvas.parentElement;
       if (layer) {
@@ -183,11 +200,14 @@ export default function HomeHero() {
       const waveRect = waveCanvas.getBoundingClientRect();
       ww = Math.max(1, waveRect.width);
       wh = Math.max(1, waveRect.height);
-      const waveDpr = Math.min(window.devicePixelRatio || 1, compact ? 1 : 2);
-      waveCanvas.width = Math.round(ww * waveDpr);
-      waveCanvas.height = Math.round(wh * waveDpr);
-      waveCtx!.setTransform(waveDpr, 0, 0, waveDpr, 0, 0);
-      buildColumns(false);
+      const waveDpr = Math.min(window.devicePixelRatio || 1, 2);
+      const wavePw = Math.round(ww * waveDpr);
+      const wavePh = Math.round(wh * waveDpr);
+      if (waveCanvas.width !== wavePw || waveCanvas.height !== wavePh) {
+        waveCanvas.width = wavePw;
+        waveCanvas.height = wavePh;
+        waveCtx!.setTransform(waveDpr, 0, 0, waveDpr, 0, 0);
+      }
     }
 
     function wavePoint(t: number, L: Layout) {
@@ -234,7 +254,7 @@ export default function HomeHero() {
       if (tagStart == null && wordStart != null && now - wordStart > 980) tagStart = now;
 
       const waveP = waveStart ? clamp((now - waveStart) / 2100) : 0;
-      if (waveP > 0.02 && waveP < 0.94 && Math.random() < 0.45) {
+      if (!compact && waveP > 0.02 && waveP < 0.94 && Math.random() < 0.45) {
         const head = wavePoint(clamp(waveP), L);
         sparks.push({
           x: head.x + (Math.random() - 0.5) * 8,
@@ -413,12 +433,10 @@ export default function HomeHero() {
           if (traceLogo(L, eased, -1)) ctx!.stroke();
         };
         if (compact) {
-          ctx!.shadowColor = "rgba(0, 176, 255, 0.75)";
-          ctx!.shadowBlur = 10;
+          ctx!.shadowBlur = 0;
           ctx!.strokeStyle = "#4ec8ff";
           ctx!.lineWidth = lw;
           strokeBoth();
-          ctx!.shadowBlur = 0;
         } else {
           ctx!.shadowColor = "rgba(0, 176, 255, 0.9)";
           ctx!.shadowBlur = 20;
@@ -559,13 +577,15 @@ export default function HomeHero() {
       }
       prevTime = performance.now();
       raf = requestAnimationFrame(loop);
+      window.clearTimeout(failTimer);
+      failTimer = window.setTimeout(revealContent, compact ? 3200 : 9000);
     }
 
     const observer = new ResizeObserver(() => {
       if (!cancelled && w > 0) resize();
     });
     observer.observe(canvas);
-    observer.observe(waveCanvas);
+    if (!compact) observer.observe(waveCanvas);
 
     const ready = document.fonts?.load
       ? document.fonts.load(`600 64px ${family}`)
@@ -575,7 +595,7 @@ export default function HomeHero() {
       new Promise((resolve) => setTimeout(resolve, 1200)),
     ]).then(boot);
 
-    const failTimer = window.setTimeout(revealContent, 9000);
+    let failTimer = 0;
 
     return () => {
       cancelled = true;
