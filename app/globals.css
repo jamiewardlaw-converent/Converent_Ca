@@ -1660,7 +1660,7 @@ p {
   width: clamp(140px, 18vw, 210px);
   height: auto;
   margin: 0.2rem 0.9rem 0.55rem 0;
-  border-radius: 10px;
+  border-radius: 50%;
   border: 1px solid var(--surface-border);
 }
 
