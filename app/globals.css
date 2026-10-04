@@ -135,14 +135,105 @@ body:has(.homeHero):not(.homeHeroSettled) .siteHeader {
   pointer-events: none;
 }
 
-@media (max-width: 800px) {
+.homeMobileIntro {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+  .homeWaves,
+  .homeHero canvas {
+    display: none;
+  }
+
   .homeHero {
     min-height: 0;
+  }
+
+  .homeMobileIntro {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    display: block;
+    overflow: hidden;
+    pointer-events: none;
+    animation: homeMobileIntroOut 1s ease 3.4s forwards;
+  }
+
+  .homeMobileRain {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(transparent, #000 8%, #000 90%, transparent);
+    mask-image: linear-gradient(transparent, #000 8%, #000 90%, transparent);
+  }
+
+  .homeMobileRain span {
+    font-family: Consolas, ui-monospace, monospace;
+    font-size: 0.82rem;
+    line-height: 1.28;
+    white-space: pre;
+    text-align: center;
+    color: rgba(150, 210, 245, 0.72);
+    animation: homeMobileFall 4.8s linear infinite;
+  }
+
+  .homeMobileRain span:nth-child(2n) { animation-duration: 5.8s; animation-delay: -2s; color: rgba(186, 224, 255, 0.5); }
+  .homeMobileRain span:nth-child(3n) { animation-duration: 3.8s; animation-delay: -0.9s; }
+  .homeMobileRain span:nth-child(4n) { animation-delay: -3.1s; color: rgba(120, 190, 230, 0.85); }
+  .homeMobileRain span:nth-child(5n) { animation-duration: 5.2s; animation-delay: -3.8s; }
+
+  .homeMobileLockup {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 0 1.25rem;
+    text-align: center;
+    background: radial-gradient(ellipse at center, rgba(2, 6, 14, 0.62) 0%, rgba(2, 6, 14, 0.18) 46%, transparent 70%);
+  }
+
+  .homeMobileWord {
+    margin: 0;
+    color: #f4f8fc;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    font-size: clamp(1.45rem, 7.5vw, 2.3rem);
+    animation: homeMobileWordIn 0.85s ease 0.45s both;
+  }
+
+  .homeMobileTag {
+    margin: 0;
+    color: rgba(214, 232, 244, 0.92);
+    font-weight: 500;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    font-size: clamp(0.78rem, 3.4vw, 1rem);
+    animation: homeMobileWordIn 0.85s ease 0.9s both;
   }
 
   #about.homeBand.section {
     padding-top: 11rem;
   }
+}
+
+@keyframes homeMobileFall {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+@keyframes homeMobileWordIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes homeMobileIntroOut {
+  to { opacity: 0; visibility: hidden; }
 }
 
 .siteHeaderBar {

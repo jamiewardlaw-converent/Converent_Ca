@@ -11,6 +11,11 @@ const montserrat = Montserrat({
 const WORD = "CONVERENT";
 const TAG = "clarity in systems and software";
 
+const MOBILE_RAIN = Array.from({ length: 18 }, (_, column) => {
+  const line = Array.from({ length: 48 }, (_, row) => ((column * 5 + row * 3) % 7 > 2 ? "1" : "0")).join("\n");
+  return `${line}\n${line}`;
+});
+
 type Swell = {
   y: number;
   amp: number;
@@ -75,6 +80,17 @@ export default function HomeHero() {
   const replayRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
+    const compact = window.matchMedia("(max-width: 1024px)").matches;
+    if (compact) {
+      const timer = window.setTimeout(() => {
+        document.body.classList.add("homeHeroSettled");
+      }, 3600);
+      return () => {
+        window.clearTimeout(timer);
+        document.body.classList.remove("homeHeroSettled");
+      };
+    }
+
     const stage = canvasRef.current;
     const waveStage = waveRef.current;
     if (!stage || !waveStage) return;
@@ -85,7 +101,6 @@ export default function HomeHero() {
     if (!ctx || !waveCtx) return;
 
     const family = montserrat.style.fontFamily;
-    const compact = window.matchMedia("(max-width: 1024px)").matches;
     let cancelled = false;
     let raf = 0;
     let dpr = 1;
@@ -616,6 +631,17 @@ export default function HomeHero() {
         <h1 className="homeHeroTitle">Converent</h1>
         <p className="homeHeroTag">Clarity in systems and software</p>
         <canvas ref={canvasRef} className={montserrat.className} aria-hidden="true" />
+        <div className="homeMobileIntro" aria-hidden="true">
+          <div className="homeMobileRain">
+            {MOBILE_RAIN.map((column, index) => (
+              <span key={index}>{column}</span>
+            ))}
+          </div>
+          <div className={`homeMobileLockup ${montserrat.className}`}>
+            <p className="homeMobileWord">{WORD}</p>
+            <p className="homeMobileTag">{TAG}</p>
+          </div>
+        </div>
       </section>
     </>
   );
