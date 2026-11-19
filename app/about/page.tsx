@@ -7,7 +7,7 @@ const ABOUT_RAIL_IMAGES = [
   { src: "/brand/westport-volvo-hpdi.jpg", alt: "Westport Volvo HPDI" },
   { src: "/brand/evs.jpg", alt: "Electric vehicles" },
   { src: "/brand/ford-motor-company.jpg", alt: "Ford Motor Company" },
-  { src: "/brand/unifire.jpg", alt: "Unifire" },
+  { src: "/brand/unifire.jpg", alt: "Unifire igniters" },
 ];
 
 export default function AboutPage() {
