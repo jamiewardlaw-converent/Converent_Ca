@@ -46,9 +46,10 @@ These files were sourced from Wikimedia Commons and are free to use under the li
   - License: CC BY 2.0
   - Note: Used as the `/services` intro hero background (tinted in CSS).
 
-- `ready2scale-steps-hero.png` (Ready2Scale page hero)
-  - In-repo photography supplied by Converent (not Wikimedia Commons); used on `/ready2scale` in a 50/50 layout with a light blue-tinted CSS filter on the photo.
-  - Clothing hues on figures may be nudged toward the site accent (`#1f9dff`) via `scripts/recolor-ready2scale-trousers.mjs` for brand consistency (re-run on a fresh export if you replace the source).
+- `ready2scale-hero.jpg` (Ready2Scale page hero)
+  - In-repo composite supplied by Converent (not Wikimedia Commons): the stairs photograph with the Ready2Scale lockup, shown full width on `/ready2scale`.
+- `ready2scale-steps-hero.png`
+  - Earlier stairs photograph supplied by Converent. Clothing hues may be nudged toward the site accent (`#1f9dff`) via `scripts/recolor-ready2scale-trousers.mjs`.
 
 ## Industry tiles
 

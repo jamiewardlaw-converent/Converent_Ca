@@ -25,7 +25,13 @@ function SpeechBubbleIcon({ className }: { className?: string }) {
   );
 }
 
-export default function ContactForm() {
+export default function ContactForm({
+  heading = "Let's talk",
+  intro = "Tell us a little about your context and we'll follow up by email.",
+}: {
+  heading?: string;
+  intro?: string;
+} = {}) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -95,11 +101,8 @@ export default function ContactForm() {
       <div className="contactIntro">
         <SpeechBubbleIcon className="contactIntroIcon" />
         <div className="contactIntroText">
-          <h2>Let&apos;s talk</h2>
-          <p>
-            Tell us a little about your context and we&apos;ll follow up by
-            email.
-          </p>
+          <h2>{heading}</h2>
+          {intro ? <p>{intro}</p> : null}
         </div>
       </div>
 

@@ -84,9 +84,9 @@ export const IMAGE_CREDIT_SECTIONS: readonly CreditSection[] = [
         detail: "Supplied by Converent (not from Commons or Vecteezy).",
       },
       {
-        label: "Ready2Scale page hero — `ready2scale-steps-hero.png`",
+        label: "Ready2Scale page hero — `ready2scale-hero.jpg`",
         detail:
-          "Supplied by Converent (not from Commons or Vecteezy); shown on `/ready2scale` beside copy with a light CSS color treatment.",
+          "Supplied by Converent (not from Commons or Vecteezy). The stairs photograph is combined with the Ready2Scale lockup and shown full width on `/ready2scale`.",
       },
     ],
   },
