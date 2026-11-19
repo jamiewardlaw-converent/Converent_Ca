@@ -33,7 +33,7 @@ export default function AboutPage() {
             <div className="aboutIntroBody">
               <p className="aboutP2WithPortrait">
                 <img
-                  src="/brand/about-jamie-portrait.png"
+                  src="/brand/about-jamie-portrait.jpg"
                   alt="Jamie Wardlaw portrait"
                   className="aboutInlinePortrait"
                 />
