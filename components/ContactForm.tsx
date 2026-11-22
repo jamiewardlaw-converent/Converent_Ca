@@ -1,8 +1,37 @@
 "use client";
 
 import { useCallback, useState } from "react";
+import { CALENDLY_URL } from "./BookCallTab";
 
 const MESSAGE_MAX = 600;
+
+function CalendarIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <rect
+        x="3.5"
+        y="5"
+        width="17"
+        height="15.5"
+        rx="2"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <path
+        d="M3.5 10h17M8 3.5v3.5M16 3.5v3.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
 
 function SpeechBubbleIcon({ className }: { className?: string }) {
   return (
@@ -105,6 +134,25 @@ export default function ContactForm({
           {intro ? <p>{intro}</p> : null}
         </div>
       </div>
+
+      <a
+        className="contactBook"
+        href={CALENDLY_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <CalendarIcon className="contactBookIcon" />
+        <span className="contactBookCopy">
+          <span className="contactBookTitle">Book a 30-minute call</span>
+          <span className="contactBookHint">
+            Pick a time on the calendar. No back-and-forth.
+          </span>
+        </span>
+        <span className="contactBookGo" aria-hidden="true">
+          →
+        </span>
+      </a>
+      <p className="contactOr">or send a message</p>
 
       <form className="contactForm" onSubmit={onSubmit} noValidate>
         <div className="contactField">

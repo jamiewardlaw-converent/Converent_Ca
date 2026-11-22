@@ -1,3 +1,5 @@
+import BookCallTab from "./BookCallTab";
+
 const LINKEDIN_URL = "https://www.linkedin.com/company/converent";
 
 export type SiteHeaderProps = {
@@ -30,6 +32,7 @@ export default function SiteHeader({
             </nav>
           </div>
           <div className="siteHeaderEnd">
+            <BookCallTab />
             <a
               href={LINKEDIN_URL}
               className="siteHeaderSocialLink"
